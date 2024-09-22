@@ -16,7 +16,7 @@ NeuralNetwork& NeuralNetwork::StackLayer(BaseLayer* layer) {
     Serial.println("Cannot stack any more layers. Check your total layer count.");
     return *this;
   }
-  
+
   this->allLayer[this->stackingIndex++] = layer;
   return *this;
 }
@@ -33,17 +33,37 @@ void NeuralNetwork::Build() {
   }
 }
 
-void NeuralNetwork::Train(float* inputs, float* desired, int totalItems, int epochs, float learningRate) {
+float* NeuralNetwork::Predict(float* inputs, int inputLength) {
+    //give the input neurons the input values:
+  for (int j = 0; j < inputLength; j++) {
+    this->allLayer[0]->NeuronValues[j] = inputs[j];
+  }
+
+  //Feed forward input values:
+  for (int j = 1; j < this->totalLayers; j++) {
+    this->allLayer[j]->FeedForward();
+  }
+
+  return this->allLayer[this->totalLayers - 1]->NeuronValues;
+}
+
+
+void NeuralNetwork::Train(float* inputs, float* desired, int totalItems, int inputItemCount, int epochs, float learningRate) {
+  Serial.println("Begin training");
+  
   for (int epoch = 0; epoch < epochs; epoch++) {
     for (int i = 0; i < totalItems; i++) {
-      //TODO: hardcoded index is not good!
-      this->allLayer[0]->NeuronValues[0] = inputs[i * 2 + 0];
-      this->allLayer[0]->NeuronValues[1] = inputs[i * 2 + 1];
 
-      for (int j = 0; j < this->totalLayers; j++) {
+      //feed forward the input values:
+      for (int j = 0; j < inputItemCount; j++) {
+        this->allLayer[0]->NeuronValues[j] = inputs[i * inputItemCount + j];
+      }
+
+      for (int j = 1; j < this->totalLayers; j++) {
         this->allLayer[j]->FeedForward();
       }
 
+      //back propagate the model:
       for (int j = this->totalLayers - 1; j >= 0; j--) {
         this->allLayer[j]->Train(&desired[i], learningRate);
       }
@@ -54,4 +74,6 @@ void NeuralNetwork::Train(float* inputs, float* desired, int totalItems, int epo
       Serial.println(epoch);
     }
   }
+
+  Serial.println("Training Done!");
 }
