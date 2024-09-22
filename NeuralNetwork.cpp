@@ -16,6 +16,7 @@ NeuralNetwork& NeuralNetwork::StackLayer(BaseLayer* layer) {
     Serial.println("Cannot stack any more layers. Check your total layer count.");
     return *this;
   }
+  
   this->allLayer[this->stackingIndex++] = layer;
   return *this;
 }
