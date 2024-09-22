@@ -13,11 +13,11 @@ void setup() {
   float inputs[4][2] = { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, 1 } };
   float desired[4][1] = { { 0 }, { 1 }, { 1 }, { 0 } };
 
-  nn->Train((float*)inputs, (float*)desired, 4, 2, 20000, 0.01f);
+  nn->Train((float *)inputs, (float *)desired, 4, 2, 20000, 0.01f);
 
   //predict stuff:
   for (int i = 0; i < 4; i++) {
-    float * pred = nn->Predict(inputs[i], 2);
+    float *pred = nn->Predict(inputs[i], 2);
     Serial.print("PREDICTION: ");
     Serial.println(pred[0]);
   }

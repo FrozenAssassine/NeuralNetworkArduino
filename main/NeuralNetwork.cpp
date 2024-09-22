@@ -34,7 +34,7 @@ void NeuralNetwork::Build() {
 }
 
 float* NeuralNetwork::Predict(float* inputs, int inputLength) {
-    //give the input neurons the input values:
+  //give the input neurons the input values:
   for (int j = 0; j < inputLength; j++) {
     this->allLayer[0]->NeuronValues[j] = inputs[j];
   }
@@ -50,7 +50,7 @@ float* NeuralNetwork::Predict(float* inputs, int inputLength) {
 
 void NeuralNetwork::Train(float* inputs, float* desired, int totalItems, int inputItemCount, int epochs, float learningRate) {
   Serial.println("Begin training");
-  
+
   for (int epoch = 0; epoch < epochs; epoch++) {
     for (int i = 0; i < totalItems; i++) {
 
