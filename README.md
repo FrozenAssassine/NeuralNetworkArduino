@@ -56,12 +56,16 @@ void setup() {
   float inputs[4][2] = { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, 1 } };
   float desired[4][1] = { { 0 }, { 1 }, { 1 }, { 0 } };
 
-  nn->Train((float*)inputs, (float*)desired, 4, 2, 20000, 0.01f);
+  nn->Train((float*)inputs, (float*)desired, 4, 2, 10000, 0.05f);
 
   // Predict XOR results:
   for (int i = 0; i < 4; i++) {
-    float * pred = nn->Predict(inputs[i], 2);
-    Serial.print("PREDICTION: ");
+    float *pred = nn->Predict(inputs[i], 2);
+    Serial.print("PREDICTION ");
+    Serial.print(inputs[i][0]);
+    Serial.print(" ");
+    Serial.print(inputs[i][1]);
+    Serial.print(" = ");
     Serial.println(pred[0]);
   }
 }
