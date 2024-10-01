@@ -16,6 +16,8 @@ This project is a lightweight neural network implementation designed to run on m
 
 While it takes just some **seconds** to train on the ESP32, the Arduino requires significantly more time due to limited processing power.
 
+## 📎 [Blog to this project](https://medium.com/@FrozenAssassine/neural-network-from-scratch-on-esp32-2a53a7b65f9f)
+
 ## 🛠️ Features
 - **On-device training**: Train your neural network directly on ESP32 or Arduino.
 - **XOR**: Predict simple numbers like in xor.
