@@ -13,7 +13,7 @@ NeuralNetwork::~NeuralNetwork() {
 
 NeuralNetwork& NeuralNetwork::StackLayer(BaseLayer* layer) {
   if (this->stackingIndex >= this->totalLayers) {
-    Serial.println("Cannot stack any more layers. Check your total layer count.");
+    Serial.println("Can not stack any more layers. Check your total layer count.");
     return *this;
   }
 
@@ -70,7 +70,7 @@ void NeuralNetwork::Train(float* inputs, float* desired, int totalItems, int inp
     }
 
     if (epoch % 100 == 0) {
-      Serial.print("EPOCH ");
+      Serial.print("Epoch ");
       Serial.println(epoch);
     }
   }
