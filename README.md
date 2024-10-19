@@ -34,6 +34,10 @@ While it takes just some **seconds** to train on the ESP32, the Arduino requires
 - ESP32: Fast training (~seconds).
 - Arduino: Slower training (~minutes or more).
 
+## 🫶 Code considerations
+I tried to keep the code as simple and easy to understand as possible. The neural network is completely built using OOP principles, which means that everything is its own class. This is useful for structuring the model later.
+For the individual layers, I used the basic principle of inheritance, where I have a BaseLayer class and each layer inherits from it. The BaseLayer also implements some functions, like Train and FeedForward, as well as pointers to the weights, values, biases, and errors. In my inherited classes, I only have to override these functions with the training logic and variable implementations. This is very useful when adding new layers.
+
 ## 🏗️ How to Use
 
 1. Clone this repository and open the project in your preferred environment for ESP32 or Arduino.
